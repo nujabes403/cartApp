@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="cartApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link rel="stylesheet" href="./lib/css/bootstrap.css"/>
+    <script src="./lib/js/bootstrap.js"></script>
+    <script src="./lib/js/angular.js"></script>
+    <script src="./app/cart.js"></script>
+</head>
+<body ng-controller="cartMainCtrl">
+
+
+<table class="table">
+    <thead>
+    <th>Product Name</th>
+    <th>Price</th>
+    </thead>
+    <td><input ng-model="cartInput.product"/></td>
+    <td><input type="number" ng-model="cartInput.price"/></td>
+    <td><button class="btn btn-primary" ng-click="addCart()">Add</button></td>
+    <tbody ng-repeat="cart in cartData">
+    <td>{{cart.product}}</td>
+    <td>{{cart.price}}</td>
+    <td><button class="btn btn-danger">Delete</button></td>
+    </tbody>
+</table>
+</body>
+</html>
