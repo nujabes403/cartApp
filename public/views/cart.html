@@ -25,7 +25,7 @@
 
     <tbody ng-repeat="cart in cartData" ng-init="cart.editOn=false;">
     <td ng-hide="cart.editOn">{{cart.product}}</td>
-    <td ng-hide="cart.editOn">{{cart.price | currency}}</td>
+    <td ng-hide="cart.editOn">{{cart.price | currency:undefined:0}}</td>
     <td ng-show="cart.editOn"><input ng-model="cart.product" type="text"/></td>
     <td ng-show="cart.editOn"><input ng-model="cart.price" type="number"/></td>
     <td ng-hide="cart.editOn"><button ng-click="cart.editOn=true;" class="btn btn-warning">Edit</button></td>

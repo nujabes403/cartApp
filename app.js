@@ -38,6 +38,7 @@ MongoClient.connect('mongodb://localhost:27017/cartDB', function(err,db){
     app.post('/addCart',function(req,res){
         db.collection('cart').insert(req.body,function(err,doc){
             if(err) throw err;
+            res.json(doc);
         });
     });
 
@@ -45,6 +46,7 @@ MongoClient.connect('mongodb://localhost:27017/cartDB', function(err,db){
        var id = req.params.id;
         db.collection('cart').remove({_id:ObjectId(id)},function(err,doc){
            if(err) throw err;
+            res.json(doc);
         });
     });
 
@@ -54,8 +56,10 @@ MongoClient.connect('mongodb://localhost:27017/cartDB', function(err,db){
         var sort = [];
         var operator = {$set: {product:req.body.product , price:req.body.price } };
         var options = { 'new' : true };
+
         db.collection('cart').findAndModify(query,sort,operator,options,function(err,doc){
             if(err) throw err;
+            res.json(doc);
         });
     });
     app.listen(8080);
