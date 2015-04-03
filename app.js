@@ -6,6 +6,7 @@ var app = express();
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectID;
 
 app.engine('html',require('ejs').__express);
 app.set('view engine','html');
@@ -28,7 +29,7 @@ MongoClient.connect('mongodb://localhost:27017/cartDB', function(err,db){
     });
 
     app.get('/cart',function(req,res){
-        db.collection('cart').find({},{_id:false}).toArray(function(err,docs){
+        db.collection('cart').find({}).toArray(function(err,docs){
             if(err) throw err;
             res.json(docs);
         });
@@ -40,7 +41,28 @@ MongoClient.connect('mongodb://localhost:27017/cartDB', function(err,db){
         });
     });
 
+    app.delete('/deleteCart/:id',function(req,res){
+       var id = req.params.id;
+        db.collection('cart').remove({_id:ObjectId(id)},function(err,doc){
+           if(err) throw err;
+        });
+    });
+
+    app.put('/editCart/:id',function(req,res){
+        var id = req.params.id;
+        var query = {_id:ObjectId(id)};
+        var sort = [];
+        var operator = {$set: {product:req.body.product , price:req.body.price } };
+        var options = { 'new' : true };
+        db.collection('cart').findAndModify(query,sort,operator,options,function(err,doc){
+            if(err) throw err;
+        });
+    });
     app.listen(8080);
     console.log("Server Running on port 8080");
-});
+
+    });
+
+
+
 

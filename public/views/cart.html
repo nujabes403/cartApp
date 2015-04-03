@@ -10,20 +10,29 @@
 </head>
 <body ng-controller="cartMainCtrl">
 
-
+<div class="container">
+    <img src="./img/main.png"/>
+    <h1>Nujabes Cart</h1>
 <table class="table">
     <thead>
     <th>Product Name</th>
     <th>Price</th>
     </thead>
-    <td><input ng-model="cartInput.product"/></td>
+
+    <td><input type="text" ng-model="cartInput.product"/></td>
     <td><input type="number" ng-model="cartInput.price"/></td>
     <td><button class="btn btn-primary" ng-click="addCart()">Add</button></td>
-    <tbody ng-repeat="cart in cartData">
-    <td>{{cart.product}}</td>
-    <td>{{cart.price}}</td>
-    <td><button class="btn btn-danger">Delete</button></td>
+
+    <tbody ng-repeat="cart in cartData" ng-init="cart.editOn=false;">
+    <td ng-hide="cart.editOn">{{cart.product}}</td>
+    <td ng-hide="cart.editOn">{{cart.price | currency}}</td>
+    <td ng-show="cart.editOn"><input ng-model="cart.product" type="text"/></td>
+    <td ng-show="cart.editOn"><input ng-model="cart.price" type="number"/></td>
+    <td ng-hide="cart.editOn"><button ng-click="cart.editOn=true;" class="btn btn-warning">Edit</button></td>
+    <td ng-show="cart.editOn"><button ng-click="editCart(cart)" class="btn btn-success">Confirm</button></td>
+    <td><button ng-click="deleteCart(cart._id)" class="btn btn-danger">Delete</button></td>
     </tbody>
 </table>
+</div>
 </body>
 </html>
