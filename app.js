@@ -23,6 +23,9 @@ MongoClient.connect('mongodb://localhost:27017/cartDB', function(err,db){
     if(err) throw err;
 
     var cart = db.collection('cart');
+    var user = db.collection('user');
+
+
 
     app.get('/',function(req,res){
         res.render('cart');
@@ -62,6 +65,25 @@ MongoClient.connect('mongodb://localhost:27017/cartDB', function(err,db){
             res.json(doc);
         });
     });
+
+    app.post('/login',function(req,res){
+        var id = req.body.id;
+        var password = req.body.password;
+        db.collection('user').findOne({id:id},function(err,doc){
+            if(err) throw err;
+
+            if(doc){
+            console.log("Server : 로그인 성공!");
+                res.json("success");
+            }
+
+            else{
+                console.log("Server : 로그인 실패!")
+                res.json("error");
+            }
+        });
+    });
+
     app.listen(8080);
     console.log("Server Running on port 8080");
 

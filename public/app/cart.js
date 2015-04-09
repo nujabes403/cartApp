@@ -4,6 +4,8 @@
 angular.module('cartApp',[])
     .controller('cartMainCtrl',function($scope,$http){
 
+        //cart
+
         var refresh = function(){
             $http.get('/cart').success(function(response){
                 $scope.cartData = response;
@@ -29,5 +31,21 @@ angular.module('cartApp',[])
             cart.editOn = false;
         };
 
+        //Login Control
+        $scope.loginForm = true;
+        $scope.loginError = false;
+
+        $scope.submitLogin = function(user){
+            $http.post('/login' , user).success(function(response){
+                if(response == "error"){
+                    console.log("Client : 로그인 실패");
+                    $scope.loginError = true;
+                }
+                else{
+                    $scope.loginForm = false;
+                    $scope.loginError = false;
+                }
+            });
+        }
     });
 
