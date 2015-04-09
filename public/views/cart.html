@@ -39,6 +39,7 @@
     </form>
         <div class="well" ng-hide="loginForm">
             <h4>로그인 되었습니다!</h4>
+            <button class="btn btn-danger" ng-click="logout()">로그아웃</button>
         </div>
         <div class="well" ng-show="loginError">
             <h4>로그인에 실패하였습니다. 다시 로그인 하시겠습니까?</h4>

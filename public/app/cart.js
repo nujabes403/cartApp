@@ -32,6 +32,10 @@ angular.module('cartApp',[])
         };
 
         //Login Control
+        $scope.initLoginForm = function(){
+            $scope.user.id = "";
+            $scope.user.password = "";
+        };
         $scope.loginForm = true;
         $scope.loginError = false;
 
@@ -46,6 +50,11 @@ angular.module('cartApp',[])
                     $scope.loginError = false;
                 }
             });
+        }
+        $scope.logout = function(){
+            $scope.initLoginForm();
+            $scope.loginError = false;
+            $scope.loginForm = true;
         }
     });
 
