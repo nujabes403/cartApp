@@ -15,8 +15,9 @@ angular.module('cartApp',[])
         refresh();
 
         $scope.addCart = function(){
-            $http.post('/addCart',$scope.cartInput);
-            refresh();
+            $http.post('/addCart',$scope.cartInput).success(function(response){
+                refresh();
+            });
         };
 
         $scope.deleteCart = function(id){
