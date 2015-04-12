@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
+var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 app.engine('html',require('ejs').__express);
 app.set('view engine','html');
