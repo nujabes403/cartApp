@@ -84,7 +84,7 @@ MongoClient.connect('mongodb://so7828:157533aa@ds061741.mongolab.com:61741/cart'
         });
     });
 
-    app.listen(8080);
+    app.listen(process.env.PORT || 8080);
     console.log("Server Running on port 8080");
 
     });
